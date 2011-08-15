@@ -1,0 +1,28 @@
+#main {
+	margin-top: 30px;
+}
+
+#main h1 {
+	text-align: left;
+}
+
+#who {
+	background: #EEE;
+	padding: 10px;
+}
+
+#who_empty {
+	background: #CECECE;
+	padding: 10px;
+}
+
+#who_empty h2 {
+	color: #FF5E99;
+}
+
+#messages {
+	margin-bottom: 30px;
+	padding: 10px;
+	background: #FFF999;
+	border: 1px solid #DDD777;
+}

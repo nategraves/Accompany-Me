@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block extra_css %}
+<link href="/static/css/index/index.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+<script type='text/javascript'>
+$(function() {
+	$('#show_options').click(function(){
+		$('.extras').slideToggle();
+		if($('.extras:visible')) {
+			$('#show_options').text('Hide options');
+		} else {
+			$('#show_options').text('Show options');
+		}
+	});
+})
+
+</script>
+{% endblock %}
+
+{% block main %}
+<form id="where_form" class="grid_8 push_2" action="/trip/create/" method="post">
+    <h1 class="grid_8 alpha">
+        Tell us about your <span class="bright">trip</span>
+    </h1>
+    <p class="weak grid_8 alpha">Where</p>
+	{{ form.where.errors }}
+    {{ form.where }}
+	<div class='extras'>
+	    <p class="weak grid_8 alpha">When</p>
+    	{{ form.when }}
+    	<p class="weak grid_8 alpha">What for?</p>
+    	{{ form.why }}
+    	<p class="weak grid_8 alpha">Whom with?</p>
+    	{{ form.who }}
+		<br class="clear"/>
+	</div>
+	<span class="weak">This trip private (only those invited should see it)</span>{{ form.private }}
+	<p><a href='#' id='show_options'>Show more options</a></p>
+    {% csrf_token %}
+    <input type="submit" class="form_submit omega alpha" value="Start"/>
+</form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+
+{% block main %}
+
+<div class="grid_8 alpha">
+	<h1 class="grid_8"><span class="bright">When</span> will this be?</h1>
+	<p class="weak grid_7">Enter a date, month, or season</p>
+	<form class="grid_7" action="step2.php" method="post">
+		<input type="text" name="when" id="datepicker" class="grid_7 alpha where"/>
+		<input type="hidden" name="where" value=" <? echo $where; ?>"/>
+		<input type="submit" class="form_submit" value="Go"/>
+		<br class="clear" />
+	</form>
+</div>
+<div id="photos" class="grid_4 omega">
+	<h2>By the way, <span class="bright"><?php echo $where; ?></span> looks fun!</h2>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+
+{% block extra_css %}
+<link rel='stylesheet' href='/static/css/registration/register.css'>
+{% endblock %}
+
+{% block main %}
+<h1>We're <span class='pink'>glad</span> to have you join us.</h1>
+<form name='registration' action='/registration/register/' method='POST'>
+	
+	<p class='weak'>
+		Select a username
+		{{ form.username.errors }}
+	</p>
+	<p>{{ form.username }}</p>
+	
+	<p class='weak'>
+		Enter your password 
+		{{ form.password1.errors }}
+	</p>
+	<p>{{ form.password1 }}</p>
+
+	<p class='weak'>
+		Reenter your password to be <b>extra</b> sure 
+		{{ form.password2.errors }}
+	</p>
+	<p>{{ form.password2 }}</p>
+
+	<div class='drop-shadow lifted'>
+		<input type='submit' value='Join Now'/>
+	</div>
+	{% csrf_token %}
+</form
+{% endblock %}

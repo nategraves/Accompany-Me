@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+{% block extra_css %}
+<link rel='stylesheet' href='/static/css/trips/view.css'>
+{% endblock %}
+
+{% block extra_js %}
+<script type='text/javascript' src='/static/js/flickr.js'></script>
+<script type='text/javascript'>
+$(function() {
+    var api_key = '003772641d5986c33ac7f1ebb2444b01';
+    var api_url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + api_key + '&format=json&text={{trip.where}}&sort=interestingness-desc&privacy_filter=1&safe_search=1&media=photos&per_page=6&jsoncallback=?';
+    $.getJSON(api_url, function(data){
+        $.each(data.photos.photo, function(k,v){
+            var link_url = 'http://flickr.com/' + v.owner + '/' + v.id;
+            var img_url = 'http://farm' + v.farm + '.static.flickr.com/' + v.server + '/' + v.id + '_' + v.secret + '_s.jpg';
+            $('#photos').append("<a href='" + link_url + "'><img src='" + img_url + "'/>");
+        });
+    });
+});
+</script>
+{% endblock %}
+
+{% block main %}
+
+{% if messages %}
+<div id='messages'>
+	{% for message in messages %}
+		{% if message.level = 25 %}
+		<p>{{ message }}</p> 
+		<p><a href='/registration/register'>Create an account</a> or <a href='/registration/login/'>log in</a> to be able to addto or edit your trip. </p>
+		{% endif %}
+	{% endfor %}	
+</div>
+{% endif %}
+
+<div id='photos' class='alpha grid_6'>
+	{% if who %}
+	<h1><span class='pink'>{{ trip.where }}</span> should be fun{% if trip.when %} in {{ trip.when }}.{% else %}.{% endif %}</h1>
+	{% else %}
+	<h1 class='downplayed'>{{ trip.where}} should be fun{% if trip.when %}in {{ trip.when }}.{% else %}.{% endif %}</h1>
+	{% endif %}
+</div>
+
+{% if who %}
+<div id='who' class='grid_4'>
+	<h2>Who's Invited:</h2>
+		Output whos
+</div>
+{% else %}
+<div id='who_empty' class='grid'>
+	<h2>Who's Invited:</h2>
+	<a href='#'>Invite some friends now!</a>
+	<div id="fb-root"></div>
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
+	<script>
+		FB.init({ 
+			appId:'142506149154206', cookie:true, 
+			status:true, xfbml:true 
+		});
+	</script>
+</div>
+{% endif %}
+
+<div id='why' class='alpha grid_6'>
+	<h3>Why {{ trip.where }}:</h3>
+	{% if why %}
+		{% for each in why %}
+			{{ each.why }}
+		{% endfor %}
+	{% else %}
+		<p><a href='#'>Add a why</a></p>
+	{% endif %}
+</div>
+
+{% endblock %}

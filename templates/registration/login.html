@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+
+{% block extra_css %}
+<link rel='stylesheet' href='/static/css/registration/register.css'>
+{% endblock %}
+
+{% block main %}
+<form name='login' action='/registration/login/' method='POST'>
+	<p class='weak'>{{ form.username.label }}</p>
+	<p>{{ form.username }}</p>
+	<p class='weak'>{{ form.password.label }}</p>
+	<p>{{ form.password }}</p>
+	<div class='drop-shadow lifted'>
+		<input type='submit' value='Login'/>
+	</div>
+	{% csrf_token %}
+</form>
+{% endblock %}

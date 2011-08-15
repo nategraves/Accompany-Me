@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block main %}
+{% for each in trips %}
+<p><a href='/trips/view/{{each.id}}/'>{{ each.where|title }} Trip suggested by {{ each.who }}</a><p>
+{% empty %}
+No trips found.
+{% endfor %}
+{% endblock %}

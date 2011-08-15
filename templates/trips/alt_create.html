@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+
+{% block extra_css %}
+<link rel='stylesheet' href='/static/css/trips/alt_create.css'>
+{% endblock %}
+
+{% block extra_js %}
+<script type='text/javascript' src='/static/js/flickr.js'></script>
+<script type='text/javascript'>
+	$(function(){
+		getFlickr();
+	});
+</script>
+{% endblock %}
+
+{% block main %}
+<script>
+window.fbAsyncInit = function() {
+	FB.init({
+		appId  : '142506149154206',
+		status : true, // check login status
+		cookie : true, // enable cookies to allow the server to access the session
+		xfbml  : true,  // parse XFBML
+		oauth : true //enables OAuth 2.0
+	});
+};
+
+(function() {
+	var e = document.createElement('script');
+	e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+	e.async = true;
+	document.getElementById('fb-root').appendChild(e);
+	console.log('Enter async');
+}());
+</script>
+
+<h1 style='margin: a-50px 0 40px;'>Finish planning your trip to {{ where|title }}</h1>
+<div id='photos'>
+	<p>({{where|title}} looks fun!)</p>
+</div>
+<form>
+<div>
+	<div class='alpha grid_3 suffix_1 step'>
+		<div class='padded_20'>
+			<h2 class='pink'>1. When is your trip?</h2>
+			<p>{{ form.when }}</p>
+			<br class='clear'/>
+			<p style='margin-top:10px;'>Let those accompanying you know when you're thinking of going on this trip
+			by entering a range of dates, month, season, year, etc.</p>
+		</div>
+	</div>
+	<div class='grid_3 suffix_1 step'>
+		<div class='padded_20'>
+			<h2>2. Who's invited?</h2>
+			<p>Invite some friends from Facebook to your trip!</p>
+			<image style='margin-left:100px;' src='/static/images/facebook-connect.png'/>
+			<p style='display:none;'><input type='text' style='width: 100%; margin-bottom:10px;'/><br class='clear'/></p>
+			<div id="fb-root"></div>
+		</div>
+	</div>
+	<div class='grid_4 omega step'>
+		<div class='padded_20'>
+			<h2>3. Why go on this trip?</h2>
+			<textarea style='width: 100%; height: 100px; border-top: 2px solid #DEDEDE; border-left: 2px solid #DEDEDE; border-right: 2px solid #ECECEC; border-bottom: 2px solid #ECECEC; margin-bottom: 10px;'></textarea>
+			<p>Why not give the folks you're inviting a description of your trip?</p>
+		</div>
+	</div>
+</div>
+<br class='clear'/>
+<div class='step padded_10 margin_right_20' style='float:right;'>
+	<input type="submit" value="Update Trip"/>
+</div>
+</form>
+{% endblock %}
