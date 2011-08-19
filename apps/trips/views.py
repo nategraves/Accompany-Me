@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -61,7 +64,8 @@ def create_who(request):
 	pass
 
 def view(request, trip_id):
-	trip = get_object_or_404(Trip, pk=trip_id)
+	logger.error(trip_id)
+	trip = get_object_or_404(Trip, mykey=trip_id)
 	who = Who.objects.filter(trip=trip)
 	why = Why.objects.filter(trip=trip)
 	return render_to_response('trips/view.html', {

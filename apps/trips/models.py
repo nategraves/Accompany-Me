@@ -2,6 +2,19 @@ from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
 
+def pkgen():
+	from base64 import b32encode
+	from hashlib import sha1
+	from random import random
+	rude = ('fuck', 'shit', 'cunt', 'ass', 'hell', 'damn', 'fuk', 'bitch', 'bastard', 'kike',)
+	bad_pk = True
+	while bad_pk:
+		pk = b32encode(sha1(str(random())).digest()).lower()[:6]
+		bad_pk = False
+		for rw in rude:
+			if pk.find(rw) >= 0: bad_pk = True
+	return pk
+
 class BaseModel(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	modified = models.DateTimeField(auto_now=True)
@@ -19,20 +32,8 @@ class Trip(BaseModel):
 	mykey = models.CharField(max_length=6, primary_key=True, default=pkgen)
 
 	def __unicode__(self):
-		return "Trip # %s to %s" % (self.id, self.where)
+		return "Trip to %s: %s" % (self.where, self.mykey)
 
-	def pkgen():
-		from base64 import b32encode
-		from hashlib import sha1
-		from random import random
-		rude = ('fuck', 'shit', 'cunt', 'ass', 'hell', 'damn', 'fuk', 'bitch', 'bastard', 'kike',)
-		bad_pk = True
-		while bad_pk:
-			pk = b32encode(sha1(str(random())).digest()).lower()[:6]
-			bad_pk = False
-			for rw in rude:
-				if pk.find(rw) >= 0: bad_pk = True
-		return pk
 
 class TripAdmin(BaseModel):
 	trip = models.ForeignKey(Trip)
