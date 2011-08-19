@@ -45,15 +45,13 @@ input.where {
 }
 
 .form_submit {
-    line-height: 30px;
+    line-height: 28px;
     background: #464646;
     color: #FFF;
-    font-size: 18px;
-    width: 60px;
+    font-size: 14px;
     text-shadow: #333 0 0 1px;
-    border: 1px #BABABA solid;
-	float: right;
-	margin-top: 10px;
+	border: none;
+	margin-top: 1px;
 }
 
 .extras {

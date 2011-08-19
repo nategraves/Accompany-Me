@@ -1,2 +1,4 @@
 #Don't track .pyc files
 *.pyc
+*.swp
+*.swo

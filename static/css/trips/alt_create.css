@@ -2,20 +2,12 @@
 	margin-top: 10px;
 	position: relative;
 	float: left;
-	background: #fff;
+	background: #FFF;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-}
-
-input[type='submit'] {
-	color: #787878;
-	width: 100%;
-	font-size: 14px;
-	background: none;
-	border: none;
 }
 
 .step:hover:before, .step:hover:after {
@@ -45,6 +37,59 @@ input[type='submit'] {
 	transform: rotate(3deg);
 }
 
+.step:hover h2 {
+	color: #FF5E99 !important;
+}
+
+input[type='submit'] {
+	color: #787878;
+	width: 100%;
+	font-size: 14px;
+	background: none;
+	border: none;
+}
+
+textarea {
+	height: 100px; 
+	border-top: 2px solid #DEDEDE; 
+	border-left: 2px solid #DEDEDE; 
+	border-right: 2px solid #ECECEC; 
+	border-bottom: 2px solid #ECECEC; 
+}
+
+.weak {
+	color: #808080;
+	font-size: 11px;
+	margin-bottom: 3px;
+}
+
 #photos {
 	margin-bottom: 20px;
+}
+
+#photos img {
+	margin: 5px 5px 0 0;
+	padding: 2px;
+}
+
+#fb-photo-holder {
+	padding: 10px 0 10px 17px;
+	width: 298px;
+}
+
+#fb-button {
+	margin-left: 65px;
+}
+
+.fb-photo {
+	text-align: center;
+	height: 115px;
+	width: 66px;
+	float: left;
+	background: #FFF:
+}
+
+.fb-photo a {
+	color: #444;
+	font-size: 12px;
 }

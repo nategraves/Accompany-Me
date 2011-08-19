@@ -6,23 +6,25 @@
 
 {% block main %}
 {% if request.user.is_authenticated %}
-<h1 class='grid_12 alpha'>
+<h1 class='grid_24 alpha'>
 	Welcome back, {{ request.user.username }}! 
 </h1>
 <p>What would you like to do?</p>
 <p><a href='#'>Manage a trip</a></p>
 <p><a href='/trips/create/'>Create a new trip</a></p>
 {% else %}
-<form id="where_form" class="grid_8 push_2" action="/trip/create/" method="post">
-	<h1 class="grid_8 alpha">
+<form id="where_form" class="grid_24" action="/trip/create/" method="post">
+	<h1 class='prefix_4 grid_16 alpha'>
 		AccompanyMe wants to make planning trips with friends and family easy.
 	</h1>
-	<h2>
-	Tell us <span class='pink'>where</span> you're thinking of going to get started.
-	</h2>
-	{{ form.where }}
-	{% csrf_token %}
-	<input type="submit" class="form_submit omega alpha" value="Start"/>
+	<div class='alpha prefix_4 grid_16'>
+		<h2>
+			Tell us <span class='pink'>where</span> you're thinking of going to get started.
+		</h2>
+		{{ form.where }}
+		{% csrf_token %}
+		<input type="submit" class='form_submit grid_2' value="GO"/>
+	</div>
 </form>
 {% endif %}
 {% endblock %}

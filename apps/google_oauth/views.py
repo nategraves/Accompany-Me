@@ -3,17 +3,17 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
-#import gdata.gauth
-#import gdata.contacts.client
+import gdata.gauth
+import gdata.contacts.client
 
 from trips.models import Trip, TripAdmin, Why, Who
 from trips.forms import IndexForm
 
-"""
+
 CALLBACK_URL = 'http://localhost:8000/google_oath/get_token/'
 SCOPES = ['https://www.google.com/m8/feeds/']
 
-def login(request):
+def google_login(request):
 	client = gdata.contacts.client.ContactsClient(source='my website')
 	request_token = client.GetOAuthToken(SCOPES, CALLBACK_URL, 
 										settings.GOOGLE_CONSUMER_KEY,
@@ -38,4 +38,4 @@ def view(request, trip_id):
 		'who': who,
 		'why': why,
 	}, context_instance=RequestContext(request))
-"""
+

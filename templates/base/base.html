@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-<title>Lets Go Somewhere</title>
+<title>Lets Take A Trip</title>
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -14,12 +14,8 @@
 <link rel="stylesheet" href="/static/css/grid.css">
 {% block extra_css %}{% endblock %}
 
-
-<!-- Use CDN live 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>-->
-<!-- Use local for dev -->
-<script type="text/javascript" src="/static/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 {% block extra_js %}{% endblock %}
 
 </head>
@@ -27,9 +23,9 @@
 <body>
 
 	<div id="container">
-		<header>
+		<div id='header'>
 			{% block header %}
-			<ul id="nav" class="container_12">
+			<ul id="nav" class="container_24">
 				<li><a href="/">Home</a></li>
             	<li><a href="/trip/browse/">Browse Trips</a></li>
         		{% if request.user.is_authenticated %}
@@ -40,9 +36,9 @@
 				{% endif %}
 			</ul>
 			{% endblock %}
-		</header>
+		</div>
     
-		<div id="main" class="container_12">
+		<div id="main" class="container_24">
 			{% block main %}
 			{% endblock %}
     	</div>

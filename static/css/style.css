@@ -2,11 +2,11 @@
     Author: Accompany.me via Nate Graves 
  */
 
-header {
+#header {
 	height:50px;
 	line-height:50px;
 	background: #000;
-	color: #CCC;
+	color: #AAA;
 }
 
 #nav {

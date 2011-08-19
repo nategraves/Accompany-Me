@@ -6,63 +6,92 @@
 
 {% block extra_js %}
 <script type='text/javascript' src='/static/js/flickr.js'></script>
+<script src="//connect.facebook.net/en_US/all.js"></script>
 <script type='text/javascript'>
 	$(function(){
-		getFlickr();
+		//Facebook stuff
+		FB.init({
+			appId  : '142506149154206',
+			status : true, // check login status
+			cookie : true, // enable cookies to allow the server to access the session
+			xfbml  : true,  // parse XFBML
+			oauth : true //enables OAuth 2.0
+		});
+
+		//Other stuff
+		getFlickr('{{ where }}', 5);
+		fbLogin();
 	});
+
+	function fbLogin() {
+		FB.getLoginStatus(function(response) {
+			if (response.authResponse) {
+				// show friends
+				console.log("Already a member here");
+				FB.api('/me', function(response) {
+					getFBFriends();		
+				});
+			} else {
+				// show connect button
+				$('#fb-photo-holder').append("<a id='fb-button' href='#'><image src='/static/images/facebook-connect.png'/></a>");
+				$('#fb-button').click(function() {
+					FB.login(function(response) {
+						getFBFriends();
+					}, {scope: 'email, publish_stream'});
+				}); 
+			}
+		});
+
+	function getFBFriends() {
+		if ($('#fb-button')) {
+			$('#fb-button').remove();
+		}
+		FB.api('/me/friends', function(response) {
+			for(i=0; i<=23; i++) {
+				var fb_url = 'http://facebook.com/' + response.data[i].id;
+				var fb_photo_url = 'https://graph.facebook.com/' + response.data[i].id + '/picture/';
+				var linked_image = "<div class='fb-photo'><a href='" + fb_url + "'/><img src='" + fb_photo_url + "'/></a><p><a href=" + fb_url + ">" + response.data[i].name + "</a></p></div>";
+				$('#fb-photo-holder').append(linked_image);
+			}
+			$('#fb-photo-holder').append("<br class='clear'/>");
+		});
+	}
+}
 </script>
 {% endblock %}
 
 {% block main %}
 <script>
-window.fbAsyncInit = function() {
-	FB.init({
-		appId  : '142506149154206',
-		status : true, // check login status
-		cookie : true, // enable cookies to allow the server to access the session
-		xfbml  : true,  // parse XFBML
-		oauth : true //enables OAuth 2.0
-	});
-};
 
-(function() {
-	var e = document.createElement('script');
-	e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-	e.async = true;
-	document.getElementById('fb-root').appendChild(e);
-	console.log('Enter async');
-}());
 </script>
 
-<h1 style='margin: a-50px 0 40px;'>Finish planning your trip to {{ where|title }}</h1>
-<div id='photos'>
-	<p>({{where|title}} looks fun!)</p>
+<h1 class='alpha grid_12'>Finish planning your trip to {{ where|title }}</h1>
+<div class='grid_12 omega'id='photos'>
+	<p>Select an image of {{where|title}} to use as your trip page's background:</p>
 </div>
 <form>
 <div>
-	<div class='alpha grid_3 suffix_1 step'>
-		<div class='padded_20'>
-			<h2 class='pink'>1. When is your trip?</h2>
+	<div class='alpha grid_6 suffix_2 step'>
+		<div class='grid_6 margin_top_10 margin_bottom_10'>
+			<h2>1. When is your trip?</h2>
+			<p class='weak'>Enter a month, a season, a year, etc.</p>
 			<p>{{ form.when }}</p>
 			<br class='clear'/>
-			<p style='margin-top:10px;'>Let those accompanying you know when you're thinking of going on this trip
-			by entering a range of dates, month, season, year, etc.</p>
 		</div>
 	</div>
-	<div class='grid_3 suffix_1 step'>
-		<div class='padded_20'>
+	<div class='grid_6 suffix_2 step' id='fb-friends'>
+		<div class='grid_6 margin_top_10 margin_bottom_10'>
 			<h2>2. Who's invited?</h2>
-			<p>Invite some friends from Facebook to your trip!</p>
-			<image style='margin-left:100px;' src='/static/images/facebook-connect.png'/>
-			<p style='display:none;'><input type='text' style='width: 100%; margin-bottom:10px;'/><br class='clear'/></p>
-			<div id="fb-root"></div>
+			<div id='fb-root'></div>
+			<p class='weak grid_8 margin_left_20'>Invite some friends from Facebook to your trip!</p>
+			<div id='fb-photo-holder'></div>
 		</div>
 	</div>
-	<div class='grid_4 omega step'>
-		<div class='padded_20'>
+	<div class='grid_8 omega step'>
+		<div class='grid_8 margin_top_10 margin_bottom_10'>
 			<h2>3. Why go on this trip?</h2>
-			<textarea style='width: 100%; height: 100px; border-top: 2px solid #DEDEDE; border-left: 2px solid #DEDEDE; border-right: 2px solid #ECECEC; border-bottom: 2px solid #ECECEC; margin-bottom: 10px;'></textarea>
-			<p>Why not give the folks you're inviting a description of your trip?</p>
+			<p class='grid_8 weak'>Enter a description of your trip</p>
+			<textarea class='prefix_1 grid_6'></textarea>
 		</div>
 	</div>
 </div>
