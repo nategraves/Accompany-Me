@@ -11,9 +11,9 @@ if path:
 	sys.path = list(path) + sys.path
 sys.path.insert(0, join (PROJECT_ROOT, "apps"))
 
-import settings_prod
+import settings
 if __name__ == "__main__":
-    execute_manager(settings_prod)
+    execute_manager(settings)
 
 
 #This is Django's original way of doing things

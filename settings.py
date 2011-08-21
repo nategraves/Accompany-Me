@@ -103,6 +103,10 @@ MIDDLEWARE_CLASSES = (
 	#'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
+#SESSION_ENGINE = 'django.contrib.sessions.backends.cookies'
+#SESSION_COOKIE_HTTPONLY = True
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
 #DEBUG_TOOLBAR_PANELS = (
     #'debug_toolbar.panels.version.VersionDebugPanel',
     #'debug_toolbar.panels.timer.TimerDebugPanel',
@@ -120,7 +124,7 @@ MIDDLEWARE_CLASSES = (
 #}
 
 INTERNAL_IPS = ('127.0.0.1',)
-ROOT_URLCONF = 'going.urls'
+ROOT_URLCONF = 'accompany.urls'
 
 TEMPLATE_DIRS = (
 	os.path.join(DIRNAME, 'templates')

@@ -12,28 +12,33 @@ from trips.forms import IndexForm, AltIndexForm
 
 def alt_create(request):
 	form = AltIndexForm()
+	return render_to_response('trips/alt_create.html', {
+		'form': form,
+		'where': request.POST['where']
+	}, context_instance=RequestContext(request))
+
+def add_details(request):
+	form = AltIndexForm()
 	if request.method == 'POST':
 		form = AltIndexForm(request.POST)
 		if form.is_valid():
 			new_trip = Trip(
 				where=request.POST['where'], 
 				when=request.POST['when'],
-				why=request.POST['why'],
+				desc=request.POST['desc'],
 			)
 			new_trip.save()
 			if request.user.is_authenticated():
 				new_trip.author = request.user
 				trip_admin = TripAdmin(new_trip, request.user)
 			else:
-				request.session['trip_id'] = new_trip.id
-
+				request.session['trip_id'] = new_trip.mykey
 			messages.success(request, 'Your trip has been created!')
 			return HttpResponseRedirect('/trips/view/%s' % new_trip.mykey)
 		messages.error(request, 'There was a problem with your trip')
-		return render_to_response('trips/alt_create.html', {
-			'form': form,
-		}, context_instance=RequestContext(request))
-	return HttpResponseRedirect('/')
+	return render_to_response('trips/alt_create.html', {
+		'form': form,
+	}, context_instance=RequestContext(request))
 
 def create(request):
 	form = IndexForm()
@@ -61,7 +66,7 @@ def create(request):
 			# Give a nice message
 			messages.success(request, 'Your trip has been created!')
 
-			return HttpResponseRedirect('/trips/view/%d/' % new_trip.id)
+			return HttpResponseRedirect('/trips/view/%d/' % new_trip.mykey)
 	return render_to_response('trips/create.html', {
 		'form': form,
 	}, context_instance=RequestContext(request))
@@ -76,8 +81,8 @@ def create_who(request):
 	pass
 
 def view(request, trip_id):
-	logger.error(trip_id)
-	trip = get_object_or_404(Trip, mykey=trip_id)
+	print (trip_id)
+	trip = get_object_or_404(Trip, pk=trip_id)
 	who = Who.objects.filter(trip=trip)
 	why = Why.objects.filter(trip=trip)
 	return render_to_response('trips/view.html', {

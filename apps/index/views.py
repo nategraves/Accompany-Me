@@ -8,9 +8,6 @@ from trips.models import TripAdmin
 
 def home(request):
 	form = IndexForm()
-	if request.method == 'POST':
-		where = request.POST['where']
-		HttpResponseRedirect('/trips/create/%s' % where)
 	return render_to_response('index/index.html',{
 		'form': form,
 	}, context_instance=RequestContext(request))

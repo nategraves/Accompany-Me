@@ -31,7 +31,7 @@ $(function(){
 
 </script>
 
-<form action='/trips/create/' method='POST'>
+<form action='/trips/details/' method='POST'>
 <div class='grid_24'>
 	<h1 class='alpha grid_12'>Finish planning your trip to<br/><span class='pink'>{{ where|title }}</span></h1>
 	<div class='grid_12 omega text_right'>
@@ -56,13 +56,14 @@ $(function(){
 	<div class='grid_8 omega step padding_top_10 padding_bottom_10'>
 		<h2>3. Why go on this trip?</h2>
 		<p class='grid_8 weak'>Enter a description of your trip</p>
-		{{ form.why }}
+		{{ form.desc }}
 	</div>
 </div>
 <br class='clear'/>
 <div class='step padded_10 margin_right_20' style='float:right;'>
 	<input type="submit" value="Update Trip"/>
 </div>
-<input type='hidden' id='where' value='{{ where }}'/>
+<input type='hidden' id='id_where' name='where' value='{{ where }}'/>
+{% csrf_token %}
 </form>
 {% endblock %}
