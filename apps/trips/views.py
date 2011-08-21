@@ -11,14 +11,26 @@ from trips.models import Trip, TripAdmin, Why, Who
 from trips.forms import IndexForm, AltIndexForm
 
 def alt_create(request):
-	if request.POST:
-		form = AltIndexForm()
-		if request.POST['where']:
-			where = request.POST['where'] 
-		else: 
-			where = 'New York'
+	form = AltIndexForm()
+	if request.method == 'POST':
+		form = AltIndexForm(request.POST)
+		if form.is_valid():
+			new_trip = Trip(
+				where=request.POST['where'], 
+				when=request.POST['when'],
+				why=request.POST['why'],
+			)
+			new_trip.save()
+			if request.user.is_authenticated():
+				new_trip.author = request.user
+				trip_admin = TripAdmin(new_trip, request.user)
+			else:
+				request.session['trip_id'] = new_trip.id
+
+			messages.success(request, 'Your trip has been created!')
+			return HttpResponseRedirect('/trips/view/%s' % new_trip.mykey)
+		messages.error(request, 'There was a problem with your trip')
 		return render_to_response('trips/alt_create.html', {
-			'where': where,
 			'form': form,
 		}, context_instance=RequestContext(request))
 	return HttpResponseRedirect('/')

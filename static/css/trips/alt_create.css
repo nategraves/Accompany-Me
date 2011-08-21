@@ -41,6 +41,10 @@
 	color: #FF5E99 !important;
 }
 
+.step h2 {
+	margin-left: 5px;
+}
+
 input[type='submit'] {
 	color: #787878;
 	width: 100%;
@@ -60,11 +64,20 @@ textarea {
 .weak {
 	color: #808080;
 	font-size: 11px;
-	margin-bottom: 3px;
+	margin: 0px 0px 3px 5px;
 }
 
 #photos {
 	margin-bottom: 20px;
+	list-style: none;
+}
+
+#photos li {
+	display: inline;
+}
+
+.ui-selected {
+	border: 2px solid #A3B2F1;
 }
 
 #photos img {
@@ -92,4 +105,9 @@ textarea {
 .fb-photo a {
 	color: #444;
 	font-size: 12px;
+}
+
+.where {
+	width: 294px;
+	margin: 0 5px;
 }

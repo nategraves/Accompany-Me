@@ -697,3 +697,39 @@ div.padded_20 {
 .margin_bottom_20 {
 	margin_bottom: 20px;
 }
+
+.padding_top_10 {
+	padding-top: 10px;
+}
+
+.padding_top_15 {
+	padding-top: 15px;
+}
+
+.padding_top_20 {
+	padding-top: 20px;
+}
+
+.padding_bottom_10 {
+	padding-bottom: 10px;
+}
+
+.padding_bottom_15 {
+	padding-bottom: 15px;
+}
+
+.padding_bottom_20 {
+	padding-bottom: 20px;
+}
+
+.text_left {
+	text-align: left;
+}
+
+.text_center {
+	text-align: center;
+}
+
+.text_right {
+	text-align: right;
+}

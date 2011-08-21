@@ -6,11 +6,8 @@ class IndexForm(forms.Form):
 	where = forms.CharField(widget=forms.TextInput(attrs={'class':'where alpha grid_13'}))
 
 class AltIndexForm(forms.Form):
-	where = forms.CharField(widget=forms.TextInput(attrs={'class':'alpha grid_16 where'}))
-	private = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class':'checkbox'}))
-	when = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'alpha grid_6 where'}))
-	why = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'alpha grid_6 where'}))
-	who = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'alpha grid_6 where'}))
+	when = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'where'}))
+	why = forms.CharField(required=False, widget=forms.Textarea(attrs={'class':'where'}))
 
 class TripForm(forms.ModelForm):
 	when = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'alpha grid_16 where'}))
