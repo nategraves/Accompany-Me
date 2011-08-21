@@ -27,6 +27,8 @@ class Trip(BaseModel):
 	#For now I'll just save when as text
 	when = models.CharField(max_length=255, blank=True, null=True)
 	where = models.CharField(max_length=255)
+	#May want to have multiple whys in the future, but for now just one
+	desc = models.TextField()
 	author = models.ForeignKey(User, blank=True, null=True)
 	private = models.BooleanField(default=False)
 	mykey = models.CharField(max_length=6, primary_key=True, default=pkgen)

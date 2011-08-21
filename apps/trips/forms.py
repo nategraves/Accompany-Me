@@ -7,7 +7,7 @@ class IndexForm(forms.Form):
 
 class AltIndexForm(forms.Form):
 	when = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'where'}))
-	why = forms.CharField(required=False, widget=forms.Textarea(attrs={'class':'where'}))
+	desc = forms.CharField(required=False, widget=forms.Textarea(attrs={'class':'where'}))
 
 class TripForm(forms.ModelForm):
 	when = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'alpha grid_16 where'}))
