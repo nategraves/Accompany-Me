@@ -11,11 +11,13 @@ from trips.models import Trip, TripAdmin, Why, Who
 from trips.forms import IndexForm, AltIndexForm
 
 def alt_create(request):
-	form = AltIndexForm()
-	return render_to_response('trips/alt_create.html', {
-		'form': form,
-		'where': request.POST['where']
-	}, context_instance=RequestContext(request))
+	if request.method == 'POST':
+		form = AltIndexForm()
+		return render_to_response('trips/alt_create.html', {
+			'form': form,
+			'where': request.POST['where']
+		}, context_instance=RequestContext(request))
+	return HttpResponseRedirect('/')
 
 def add_details(request):
 	form = AltIndexForm()
@@ -26,6 +28,7 @@ def add_details(request):
 				where=request.POST['where'], 
 				when=request.POST['when'],
 				desc=request.POST['desc'],
+				image=request.POST['image'],
 			)
 			new_trip.save()
 			if request.user.is_authenticated():
@@ -81,7 +84,6 @@ def create_who(request):
 	pass
 
 def view(request, trip_id):
-	print (trip_id)
 	trip = get_object_or_404(Trip, pk=trip_id)
 	who = Who.objects.filter(trip=trip)
 	why = Why.objects.filter(trip=trip)

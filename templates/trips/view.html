@@ -2,6 +2,15 @@
 
 {% block extra_css %}
 <link rel='stylesheet' href='/static/css/trips/view.css'>
+<style>
+html {
+	background: url({{trip.image}}) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}	
+</style>
 {% endblock %}
 
 {% block extra_js %}
@@ -28,7 +37,7 @@ $(function() {
 	{% for message in messages %}
 		{% if message.level = 25 %}
 		<p>{{ message }}</p> 
-		<p><a href='/registration/register'>Create an account</a> or <a href='/registration/login/'>log in</a> to be able to addto or edit your trip. </p>
+		<p><a href='/registration/register'>Create an account</a> or <a href='/registration/login/'>log in</a> to be able to add to or edit your trip. </p>
 		{% endif %}
 	{% endfor %}	
 </div>
