@@ -35,9 +35,9 @@ def add_details(request):
 				new_trip.author = request.user
 				trip_admin = TripAdmin(new_trip, request.user)
 			else:
-				request.session['trip_id'] = new_trip.mykey
+				request.session['trip_id'] = new_trip.key
 			messages.success(request, 'Your trip has been created!')
-			return HttpResponseRedirect('/trips/view/%s' % new_trip.mykey)
+			return HttpResponseRedirect('/trips/view/%s' % new_trip.key)
 		messages.error(request, 'There was a problem with your trip')
 	return render_to_response('trips/alt_create.html', {
 		'form': form,
@@ -69,7 +69,7 @@ def create(request):
 			# Give a nice message
 			messages.success(request, 'Your trip has been created!')
 
-			return HttpResponseRedirect('/trips/view/%d/' % new_trip.mykey)
+			return HttpResponseRedirect('/trips/view/%d/' % new_trip.key)
 	return render_to_response('trips/create.html', {
 		'form': form,
 	}, context_instance=RequestContext(request))

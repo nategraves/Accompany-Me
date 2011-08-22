@@ -9,7 +9,7 @@ def pkgen():
 	rude = ('fuck', 'shit', 'cunt', 'ass', 'hell', 'damn', 'fuk', 'bitch', 'bastard', 'kike',)
 	bad_pk = True
 	while bad_pk:
-		pk = b32encode(sha1(str(random())).digest()).lower()[:6]
+		pk = b32encode(sha1(str(random())).digest()).lower()[:8]
 		bad_pk = False
 		for rw in rude:
 			if pk.find(rw) >= 0: bad_pk = True
@@ -31,10 +31,10 @@ class Trip(BaseModel):
 	desc = models.TextField()
 	author = models.ForeignKey(User, blank=True, null=True)
 	private = models.BooleanField(default=False)
-	mykey = models.CharField(max_length=6, primary_key=True, default=pkgen)
+	key = models.CharField(max_length=8, primary_key=True, default=pkgen)
 	image = models.URLField(blank=True, null=True, default='')
 	def __unicode__(self):
-		return "Trip to %s: %s" % (self.where, self.mykey)
+		return "Trip to %s: %s" % (self.where, self.key)
 
 
 class TripAdmin(BaseModel):
@@ -43,6 +43,13 @@ class TripAdmin(BaseModel):
 
 	def __unicode__(self):
 		return "%s admin" % self.user.username
+
+class Invite(BaseModel):
+	key = models.CharField(max_length=8, primary_key=True, default=pkgen)
+	trip = models.ForeignKey(Trip)
+	inviter = models.CharField(max_length=255)
+	to = models.CharField(max_length=255)
+	response = models.NullBooleanField(blank=True, null=True)
 
 class Why(BaseModel):
 	why = models.TextField()
