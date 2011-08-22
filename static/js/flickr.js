@@ -5,7 +5,7 @@ function getFlickr(where, results) {
 		$.each(data.photos.photo, function(k,v){
 			var link_url = 'http://flickr.com/' + v.owner + '/' + v.id;
 			var img_url = 'http://farm' + v.farm + '.static.flickr.com/' + v.server + '/' + v.id + '_' + v.secret + '_s.jpg';
-			var img_large_url = 'http://farm' + v.farm + '.static.flickr.com/' + v.server + '/' + v.id + '_' + v.secret + '_o.jpg';
+			var img_large_url = 'http://farm' + v.farm + '.static.flickr.com/' + v.server + '/' + v.id + '_' + v.secret + '_b.jpg';
 			$('#photos').append("<li class='flickr'><img src='" + img_url + "'/></li>");
 			$('form').append("<input type='hidden' name='image' value='" + img_large_url + "'/>");
 		}); 
