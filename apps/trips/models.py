@@ -47,8 +47,8 @@ class TripAdmin(BaseModel):
 class Invite(BaseModel):
 	key = models.CharField(max_length=8, primary_key=True, default=pkgen)
 	trip = models.ForeignKey(Trip)
-	inviter = models.CharField(max_length=255)
 	to = models.CharField(max_length=255)
+	inviter = models.CharField(max_length=255, blank=True, null=True)
 	response = models.NullBooleanField(blank=True, null=True)
 
 class Why(BaseModel):

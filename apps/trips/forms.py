@@ -1,11 +1,11 @@
 from django import forms
 
-from trips.models import Trip, Why, Who
+from trips.models import Trip, Why, Who, Invite
 
 class IndexForm(forms.Form):
 	where = forms.CharField(widget=forms.TextInput(attrs={'class':'where alpha grid_13'}))
 
-class AltIndexForm(forms.Form):
+class DetailsForm(forms.Form):
 	when = forms.CharField(required=False, widget=forms.TextInput(attrs={'class':'where'}))
 	desc = forms.CharField(required=False, widget=forms.Textarea(attrs={'class':'where'}))
 
@@ -27,3 +27,9 @@ class WhoForm(forms.ModelForm):
 	class Meta:
 		model = Who
 		fields = ('who',)
+
+class InviteForm(forms.ModelForm):
+	invite = forms.CharField(widget=forms.TextInput(attrs={'class':'grid_13'}))
+	class Meta:
+		model = Invite
+		fields = ('to',)
