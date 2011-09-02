@@ -44,12 +44,18 @@ class TripAdmin(BaseModel):
 	def __unicode__(self):
 		return "%s admin" % self.user.username
 
+
 class Invite(BaseModel):
+	TYPE_CHOICES = (
+		(u'fb', u'Facebook'),
+		(u'email', u'Email'),
+	)
 	key = models.CharField(max_length=8, primary_key=True, default=pkgen)
 	trip = models.ForeignKey(Trip)
 	to = models.CharField(max_length=255)
 	inviter = models.CharField(max_length=255, blank=True, null=True)
 	response = models.NullBooleanField(blank=True, null=True)
+	type = models.CharField(max_length=32, choices=TYPE_CHOICES)
 
 class Why(BaseModel):
 	why = models.TextField()

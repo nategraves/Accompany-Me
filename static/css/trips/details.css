@@ -107,6 +107,10 @@ textarea {
 	font-size: 12px;
 }
 
+#email_div {
+	display: none;
+}
+
 .where {
 	width: 294px;
 	margin: 0 5px;
