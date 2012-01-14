@@ -45,7 +45,7 @@ def add_details(request):
 			messages.success(request, 'Your trip has been saved!')
 			return HttpResponseRedirect('/trips/view/%s' % trip.key)
 		messages.error(request, 'There was a problem with your trip')
-	return render_to_response('trips/alt_create.html', {
+	return render_to_response('trips/details.html', {
 		'form': form,
 	}, context_instance=RequestContext(request))
 
