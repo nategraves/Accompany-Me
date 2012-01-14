@@ -155,6 +155,12 @@ GOOGLE_CONSUMER_SECRET = '123'
 LOGIN_REDIRECT_URL = '/member/'
 LOGOUT_REDIRECT_URL = '/'
 
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_HOST_USER = 'natesgraves_acc'
+EMAIL_HOST_PASSWORD = 'a4ad5d70'
+DEFAULT_FROM_EMAIL = 'info@accompany.me'
+SERVER_EMAIL = 'info@accompany.me'
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.

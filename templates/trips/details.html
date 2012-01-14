@@ -2,11 +2,14 @@
 
 {% block extra_css %}
 <link rel='stylesheet' href='/static/css/trips/alt_create.css'>
+<link rel='stylesheet' href='/static/css/trips/details.css'>
 {% endblock %}
 
 {% block extra_js %}
 <script type='text/javascript' src='/static/js/flickr.js'></script>
 <script type='text/javascript' src='/static/js/fb.js'></script>
+<script type='text/javascript' src='/static/js/email.js'></script>
+<script type='text/javascript' src='/static/js/jquery.DOMWindow.js'></script>
 <script src="//connect.facebook.net/en_US/all.js"></script>
 <script type='text/javascript'>
 $(function(){
@@ -22,6 +25,9 @@ $(function(){
 	getFlickr('{{ where }}', 5);
 	fbLogin();
 	$('flickr').selectable();
+	$('#show_email').openDOMWindow({
+		eventType:'click'
+	});
 });
 </script>
 {% endblock %}
@@ -34,6 +40,7 @@ $(function(){
 <form action='/trips/details/' method='POST'>
 <div class='grid_24'>
 	<h1 class='alpha grid_12'>Finish planning your trip to<br/><span class='pink'>{{ where|title }}</span></h1>
+	<h1 class='alpha grid_12'>Finish planning your trip to<br/><span class='pink'>{{ trip.where|title }}</span></h1>
 	<div class='grid_12 omega text_right'>
 		<!--<p class='grid_12'>Select an image of {{where|title}} to use as your trip page's background:</p>-->
 		<ul class='grid_12 omega' id='photos'></ul>
@@ -49,6 +56,14 @@ $(function(){
 	</div>
 	<div class='grid_6 suffix_2 step padding_top_10 padding_bottom_10' id='fb-friends'>
 		<h2>2. Who's invited?</h2>
+		<p><a href='#email_div' id='show_email'>Send an email</a></p>
+		<div id='email_div'>
+			<label for='email' id='id_address_label'>Enter an email address:</label>
+			<input type='text' name='address' id='id_address' class='margin_bottom_10'/>
+			<label for='message' id='id_message_label'>Enter your message</label>
+			<textarea name='message' id='id_message'></textarea>
+			<input type='button' id='email_send' value='Invite' class='margin_bottom_10'/>
+		</div>
 		<div id='fb-root'></div>
 		<p class='weak grid_8 margin_left_20'>Invite some friends from Facebook to your trip!</p>
 		<div id='fb-photo-holder'></div>
@@ -64,6 +79,7 @@ $(function(){
 	<input type="submit" value="Update Trip"/>
 </div>
 <input type='hidden' id='id_where' name='where' value='{{ where }}'/>
+<input type='hidden' id='id_trip' name='trip' value='{{ trip.key }}'/>
 {% csrf_token %}
 </form>
 {% endblock %}
